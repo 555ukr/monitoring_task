@@ -1,6 +1,7 @@
 version: '3.6'
 services:
   telegraf:
+    platform: linux/x86_64
     image: telegraf:1.18-alpine
     volumes:
     - ./telegraf/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
@@ -15,6 +16,7 @@ services:
       - backend
 
   influxdb:
+    platform: linux/x86_64
     image: influxdb:1.8-alpine
     env_file: configuration.env
     ports:
@@ -61,12 +63,13 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     networks:
       - backend
-  
-  mongo-express:
-    image: mongo-express
+
+  backend:
+    container_name: nodejs
     restart: always
+    build: ./
     ports:
-      - 8081:8081
+      - "4000:4000"
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
