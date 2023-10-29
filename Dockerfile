@@ -2,11 +2,9 @@ FROM bitnami/express
 
 WORKDIR /usr/src/app
 
-COPY ["package.json", "./"]
+COPY ["nodejs-app/package.json", "nodejs-app/index.js", "./"]
 
 RUN npm install && mv node_modules ../
-
-COPY . .
 
 EXPOSE 3000
 
