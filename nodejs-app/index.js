@@ -12,22 +12,6 @@ mongoose.connection.on('error', (error) => {
   process.exit(1);
 });
 
-// async function createIndex() {
-//     const indexName = 'your_index_name';
-//
-//     try {
-//       const response = await esClient.indices.create({
-//         index: indexName,
-//       });
-//
-//       console.log(`Index created: ${response.body.index}`);
-//     } catch (error) {
-//       console.error(`Error creating index: ${error}`);
-//     }
-//   }
-//
-//   createIndex();
-
 const Document = mongoose.model('Document', {
     content: String,
     timestamp: { type: Date, default: Date.now },
